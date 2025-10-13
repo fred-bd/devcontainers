@@ -1,4 +1,0 @@
-CREATE USER ldap_admin WITH PASSWORD 'francesca22';
-CREATE DATABASE ldap;
-GRANT ALL PRIVILEGES ON DATABASE ldap TO ldap_admin;
-ALTER DATABASE ldap OWNER TO ldap_admin;

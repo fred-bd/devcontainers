@@ -1,6 +1,6 @@
 # Remover the coder files/folders
-.coder**
 env/**
 secrets/**
 test**
 **certs**
+**.sql

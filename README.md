@@ -22,18 +22,28 @@ This repository includes Docker Compose files for setting up different services 
 
 For detailed setup and usage instructions, refer to the following documents:
 
-- [CIT Coder Devcontainer](docs/cit-coder-devcontainer.md)
-- [DevOps Devcontainer](docs/devops-devcontainer.md)
 - [FullStack Devcontainer](docs/fullstack-devcontainer.md)
 
 ## Environment Variables
 
 The environment variables are defined in the `env` directory. Here are the variables used:
 
+this assumes the docker was configured with security enabled
 - `vars.env`
-  - `USER`
-  - `FLOW_API_KEY`
-  - `FLOW_API_SECRET`
+  - USER=fred-bd
+  - UID=1000
+  - GID=1000
+  - DH=bede-apps.com (docker host to be used)
+  - DIP=192.168.15.10 (docker host ip address)
+
+- `fullstack-vars.env`
+  - GIT_USER="Frederico Bede"
+  - GIT_USER_EMAIL=bede.apps@gmail.com
+  - PROJECTS_HOST_DIR=/home/$USER/MyProjects
+  - DOCKER_CERT_PATH=/home/$USER/certificates
+  - DOCKER_HOST=tcp://bede-apps.com:2379
+  - DOCKER_TLS=1
+  - DOCKER_TLS_VERIFY=1
 
 - `pg-vars.env`
   - `POSTGRES_USER`
@@ -43,10 +53,6 @@ The environment variables are defined in the `env` directory. Here are the varia
 
 The secrets are stored in the `secrets` directory. Here are the secret files and their corresponding variables:
 
-- `flow-api-key.txt`
-  - `FLOW_API_KEY`
-- `flow-api-secret.txt`
-  - `FLOW_API_SECRET`
 - `chartmuseum.txt`
   - `CHARTMUSEUM_CONFIGS`
 - `pg-password.txt`
@@ -66,7 +72,7 @@ After installing VSCode, you need to install the DevContainers extension. You ca
 
 ### Running the Containers
 
-To run the containers, open one of the subdirectories in `containers-configs` (e.g., `cit-coder` or `devops`) in VSCode. Once the directory is open, VSCode will prompt you to reopen the folder in a container. Follow the prompts to set up and start the development container.
+To run the containers, open one of the subdirectories in `containers-configs` (e.g., ``full-stack`) in VSCode. Once the directory is open, VSCode will prompt you to reopen the folder in a container. Follow the prompts to set up and start the development container.
 
 Alternatively, you can use the command palette (Ctrl+Shift+P) and select `Remote-Containers: Reopen in Container`.
 

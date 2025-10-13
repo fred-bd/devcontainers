@@ -24,8 +24,7 @@
 	"mounts": [
 		"source=${localWorkspaceFolder},target=/home/${localEnv:USER}/workspace,type=bind,consistency=cached",
 		"source=${localWorkspaceFolder}/scripts/postCreate.sh,target=/home/${localEnv:USER}/postCreate.sh,type=bind,consistency=cached",
-		"source=${localWorkspaceFolder}/scripts/postStart.sh,target=/home/${localEnv:USER}/postStart.sh,type=bind,consistency=cached",
-		"source=/var/run/docker.sock,target=/home/${localEnv:USER}/run/docker-host.sock,type=bind"
+		"source=${localWorkspaceFolder}/scripts/postStart.sh,target=/home/${localEnv:USER}/postStart.sh,type=bind,consistency=cached"
 	],
 	"workspaceFolder": "/home/${localEnv:USER}/projects",
 	"containerUser": "${localEnv:USER}",

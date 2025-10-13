@@ -94,7 +94,6 @@ The Docker image used in this project comes with several pre-installed tools to 
 - **Azure CLI**: Command-line tools for managing Azure resources.
 - **Docker CLI**: Command-line interface for Docker.
 - **Ansible**: An open-source automation tool.
-- **Pluto**: A tool for detecting deprecated Kubernetes APIs.
 - **Nektos/act**: Run GitHub Actions locally.
 - **docker-slim**: Optimize and secure your Docker containers.
 - **kubectx**: Switch between Kubernetes contexts.
@@ -103,12 +102,13 @@ The Docker image used in this project comes with several pre-installed tools to 
 - **DotNet SDK**: Software development kit for .NET applications.
 - **Node.js**: JavaScript runtime built on Chrome's V8 JavaScript engine.
 - **NVM**: Node Version Manager, a tool for managing multiple Node.js versions.
+- **IstioCTL**: Command line for istio.
+- **CiliumCTL**: Command line for cilium.
 
 ## Environment Variables
 
 The environment variables are defined in a `.env` file located in the directory specified by the Docker Compose configuration. Here are the variables used:
 
-- `TENANT`
 - `GIT_USER`
 - `GIT_USER_EMAIL`
 - `PROJECTS_HOST_DIR`
@@ -120,7 +120,6 @@ The environment variables are defined in a `.env` file located in the directory 
 
 The content of the `.env` file should be as follows:
 ```
-TENANT=<your-tenant>
 GIT_USER=<your-git-user>
 GIT_USER_EMAIL=<your-git-user-email>
 PROJECTS_HOST_DIR=<your-projects-host-dir>
@@ -138,7 +137,7 @@ KUBECONFIG=<your-kubeconfig-path>
 The `postCreate.sh` script is executed after the container is created. It performs the following tasks:
 
 1. **Add Aliases and NVM Configuration to .zshrc**:
-   - Adds several useful aliases for tools like `coder`, `kubectl`, and `git`.
+   - Adds several useful aliases for tools like `kubectl`, and `git`.
    - Configures NVM (Node Version Manager) for managing Node.js versions.
 
 2. **Install Azure CLI Extensions**:
