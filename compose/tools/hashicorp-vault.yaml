@@ -1,0 +1,19 @@
+services:
+  vault:
+    image: hashicorp/vault
+    container_name: vault
+    volumes:
+      - vault-logs:/vault/logs
+      - vault-files:/vault/files
+      - ./config.hcl:/vault/config/vault-config.hcl
+    cap_add:
+      - IPC_LOCK
+    entrypoint: vault server -config=/vault/config/vault-config.hcl
+    network_mode: host
+    environment:
+      VAULT_LOG_LEVEL: debug
+
+
+volumes:
+  vault-files:
+  vault-logs:

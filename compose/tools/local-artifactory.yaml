@@ -1,0 +1,9 @@
+services:
+  local-art-server:
+    build:
+      context: ../../docker/py-server
+    image: local-art-server
+    container_name: local-art-server
+    volumes:
+      - ${HOME}/MyProjects/tmp/data/local-artifactory:/app
+    network_mode: host

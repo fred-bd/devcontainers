@@ -1,0 +1,38 @@
+{
+	"name": "Demo-dev",
+	"dockerComposeFile": "${localWorkspaceFolder}/../../compose/demo-compose.yaml",
+	"service": "dev-env-demo",
+	"features": {
+		"ghcr.io/devcontainers-contrib/features/zsh-plugins:0": {
+			"omzPlugins": "https://github.com/zsh-users/zsh-autosuggestions https://github.com/zsh-users/zsh-syntax-highlighting.git",
+			"plugins": "z zsh-autosuggestions zsh-syntax-highlighting"
+		},
+		"ghcr.io/stuartleeks/dev-container-features/shell-history:0": {},
+		"ghcr.io/nils-geistmann/devcontainers-features/zsh:0": {},
+		"ghcr.io/devcontainers/features/common-utils:2": {
+			"configureZshAsDefaultShell": true,
+			"username": "${localEnv:USER}"
+		}
+	},
+	"mounts": [
+		"source=${localWorkspaceFolder},target=/home/${localEnv:USER}/workspace,type=bind,consistency=cached",
+		"source=${localWorkspaceFolder}/scripts/postCreate.sh,target=/home/${localEnv:USER}/postCreate.sh,type=bind,consistency=cached",
+		"source=${localWorkspaceFolder}/scripts/postStart.sh,target=/home/${localEnv:USER}/postStart.sh,type=bind,consistency=cached",
+		"source=/var/run/docker.sock,target=/home/${localEnv:USER}/run/docker-host.sock,type=bind"
+	],
+	"workspaceFolder": "/home/${localEnv:USER}/projects",
+	"containerUser": "${localEnv:USER}",
+	"remoteUser": "${localEnv:USER}",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"johnpapa.vscode-peacock",
+				"denco.confluence-markup",
+				"hediet.vscode-drawio",
+				"github.copilot"
+			]
+		}
+	},
+	"postCreateCommand": "chmod +x /home/${localEnv:USER}/postCreate.sh && sh -c /home/${localEnv:USER}/postCreate.sh",
+	"postStartCommand": "chmod +x /home/${localEnv:USER}/postStart.sh && sh -c /home/${localEnv:USER}/postStart.sh"
+}

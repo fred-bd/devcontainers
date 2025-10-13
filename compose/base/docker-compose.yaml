@@ -1,0 +1,14 @@
+services:
+  base:
+    build:
+      args:
+        USERNAME: ${USER}
+        USER_GID: 1000
+        USER_UID: 1000
+        OLDUSER_NAME: vscode
+    user: ${USER}
+    command: /bin/sh -c "while sleep 1000; do :; done"
+    network_mode: host
+    env_file:
+      - ../../env/vars.env
+

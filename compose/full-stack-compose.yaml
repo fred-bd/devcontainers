@@ -1,0 +1,24 @@
+include:
+  - ./includes/networks.yaml
+  - ./tools/hashicorp-vault.yaml
+  - ./tools/local-artifactory.yaml
+  - ./tools/postgres.yaml
+  - ./tools/chart-museum.yaml
+
+services:
+  dev-env-fullstack:
+    build:
+      context: ../docker/full-stack
+    image: dev-env:fullstack
+    container_name: dev-fullstack
+    env_file:
+      - ../env/fullstack-vars.env
+    extends:
+      file: ./base/docker-compose.yaml
+      service: base
+
+    volumes:
+      - ${HOME}/MyProjects:/home/${USER}/projects:cached
+      - ${HOME}/self-certificates/docker/ca-certificate.pem:/home/${USER}/certificates/ca.pem:cached
+      - ${HOME}/self-certificates/docker/client-certificate.pem:/home/${USER}/certificates/cert.pem:cached
+      - ${HOME}/self-certificates/docker/client-key.pem:/home/${USER}/certificates/key.pem:cached

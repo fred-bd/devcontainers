@@ -1,0 +1,26 @@
+include:
+  - ./includes/coder-secrets.yaml
+
+services:
+  flux-viewer:
+    build:
+      context: ../docker/flux-viewer
+      dockerfile: Dockerfile.alpine
+      args:
+        USER: ${USER}
+    user: ${USER}
+    command: /bin/sh -c "while sleep 1000; do :; done"
+    network_mode: host
+    image: dev-env:flux
+    container_name: dev-flux-coder
+    env_file:
+      - ../env/flux-viewer-vars.env
+      
+volumes:
+  projects:
+    name: projects
+
+# docker volume create data
+# docker container create -v my-projects:/data busybox
+# docker run --rm -it --name test -v data:/scripts busybox
+# docker cp "${SRC_PATH}" "${CONTAINER_ID}":"/data/${DEST_PATH}"

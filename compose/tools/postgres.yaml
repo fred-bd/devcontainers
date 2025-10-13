@@ -1,0 +1,45 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/pg-password
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./postgresql/sql-init:/docker-entrypoint-initdb.d
+      - ./postgresql/pg-config:/etc/postgresql/postgresql.conf
+      - ./postgresql/pg_hba.conf:/etc/postgresql/pg_hba.conf
+    networks:
+      - dev-network
+    secrets:
+      - pg-password
+    env_file:
+      - ../../env/pg-vars.env
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: bede.apps@gmail.com
+      PGADMIN_DEFAULT_PASSWORD_FILE: /run/secrets/pgadmin-password
+    ports:
+      - 8081:80
+    networks:
+      - dev-network
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    secrets:
+      - pgadmin-password
+
+volumes:
+  postgres-data:
+  pgadmin-data:
+
+secrets:
+  pg-password:
+    file: ../../secrets/pg-password.txt
+  pgadmin-password:
+    file: ../../secrets/pgadmin-password.txt

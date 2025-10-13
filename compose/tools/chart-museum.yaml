@@ -1,0 +1,17 @@
+services:
+  chart-museum:
+    image: ghcr.io/helm/chartmuseum:v0.16.2
+    container_name: chartmuseum
+    volumes:
+      - ${HOME}/MyProjects/tmp/data/charts:/charts
+    secrets:
+      - chartmuseum-configs
+    networks:
+      - dev-network
+    ports:
+      - 8082:8080
+    environment:
+      CONFIG: run/secrets/chartmuseum-configs 
+secrets:
+  chartmuseum-configs:
+    file: ../../secrets/chartmuseum.txt
