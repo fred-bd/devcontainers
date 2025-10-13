@@ -72,7 +72,7 @@ After installing VSCode, you need to install the DevContainers extension. You ca
 
 ### Running the Containers
 
-To run the containers, open one of the subdirectories in `containers-configs` (e.g., ``full-stack`) in VSCode. Once the directory is open, VSCode will prompt you to reopen the folder in a container. Follow the prompts to set up and start the development container.
+To run the containers, open one of the subdirectories in `containers-configs` (e.g., `full-stack`) in VSCode. Once the directory is open, VSCode will prompt you to reopen the folder in a container. Follow the prompts to set up and start the development container.
 
 Alternatively, you can use the command palette (Ctrl+Shift+P) and select `Remote-Containers: Reopen in Container`.
 
