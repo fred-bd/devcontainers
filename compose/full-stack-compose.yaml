@@ -4,6 +4,7 @@ include:
   - ./tools/local-artifactory.yaml
   - ./tools/postgres.yaml
   - ./tools/chart-museum.yaml
+  - ./tools/jenkins.yaml
 
 services:
   dev-env-fullstack:

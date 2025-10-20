@@ -1,0 +1,17 @@
+appearance:
+  consoleUrlProvider: {
+    }
+  locale:
+    allowUserPreferences: false
+    ignoreAcceptLanguage: false
+    systemLocale: "USE_BROWSER_LOCALE"
+  pipelineGraphView:
+    showGraphOnBuildPage: false
+    showGraphOnJobPage: false
+    showStageDurations: false
+    showStageNames: false
+  prism:
+    theme: PRISM
+  themeManager:
+    disableUserThemes: false
+    theme: "noOp"

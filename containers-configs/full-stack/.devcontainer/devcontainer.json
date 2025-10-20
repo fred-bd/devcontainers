@@ -7,7 +7,8 @@
 		"vault",
 		"postgres",
 		"pgadmin",
-		"local-art-server"
+		"local-art-server",
+		"jenkins-onprem"
 	],
 	"features": {
 		"ghcr.io/devcontainers-contrib/features/zsh-plugins:0": {
