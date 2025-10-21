@@ -16,6 +16,7 @@ services:
       - ${HOME}/self-certificates/docker/ca-certificate.pem:/home/jenkins/certificates/ca.pem:cached
       - ${HOME}/self-certificates/docker/client-certificate.pem:/home/jenkins/certificates/cert.pem:cached
       - ${HOME}/self-certificates/docker/client-key.pem:/home/jenkins/certificates/key.pem:cached
+      - ${HOME}/MyProjects/ssh-keys:/home/jenkins/.ssh
 
     env_file:
       - ../../env/jenkins-vars.env
@@ -23,6 +24,7 @@ services:
     environment:
       CASC_JENKINS_CONFIG: /var/configurations/casc
       VAULT_TOKEN_FILE: /run/secrets/vaultToken
+      AGENT_KEY_PASS: /run/secrets/agentKeyPass
       VAULT_ADDR: http://localhost:8200
       DOCKER_CERT_PATH: /home/jenkins/certificates
       DOCKER_TLS: 1
@@ -30,6 +32,7 @@ services:
 
     secrets:
       - vaultToken
+      - agentKeyPass
 
     extra_hosts:
       - "bede-apps.com:192.168.15.10"
@@ -40,3 +43,5 @@ volumes:
 secrets:
   vaultToken:
     file: ../../secrets/vault-token.txt
+  agentKeyPass:
+    file: ../../secrets/jenkins-agent-key-password.txt
