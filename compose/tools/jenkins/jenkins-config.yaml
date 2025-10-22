@@ -62,7 +62,25 @@ jenkins:
           uri: "tcp://bede-apps.com:2379"
         readTimeout: 60
       name: "local-docker"
-
+      templates:
+      - connector:
+          ssh:
+            sshKeyStrategy:
+              manuallyConfiguredSSHKey:
+                credentialsId: "jenkins-ssh-agent-key"
+                sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+        dockerTemplateBase:
+          bindAllPorts: true
+          bindPorts: "2223:22"
+          cpuPeriod: 0
+          cpuQuota: 0
+          image: "kubernetes-ssh-agent:0.0.1"
+          tty: true
+        labelString: "kube-agent"
+        name: "kubernetes-cmd-agent"
+        pullStrategy: PULL_NEVER
+        pullTimeout: 300
+        remoteFs: "/home/jenkins/agent"
 globalCredentialsConfiguration:
   configuration:
     providerFilter: "none"

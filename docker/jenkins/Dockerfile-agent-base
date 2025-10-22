@@ -1,0 +1,13 @@
+FROM jenkins/ssh-agent:debian-jdk17
+LABEL maintainer="Frederico Bedê <bede.apps@gmail.com>"
+
+# ssh-keygen -t rsa -f ~/projects/github/devcontainers/docker/jenkins/my-key -m PEM
+
+COPY --chown=jenkins ./my-key "${JENKINS_AGENT_HOME}"/.ssh/id_rsa
+COPY --chown=jenkins ./my-key.pub "${JENKINS_AGENT_HOME}"/.ssh/authorized_keys
+
+
+# docker run -d --rm --name=agent1 \
+#   --network dev-network \
+#   -p 2223:22 \
+#   base-test
