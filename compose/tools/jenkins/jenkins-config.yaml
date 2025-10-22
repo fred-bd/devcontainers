@@ -53,8 +53,8 @@ jenkins:
   clouds:
   - docker:
       disabled:
-        disabledByChoice: true
-        enabledByChoice: false
+        disabledByChoice: false
+        enabledByChoice: true
       dockerApi:
         connectTimeout: 60
         dockerHost:
