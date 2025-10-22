@@ -78,6 +78,7 @@ jenkins-design-language
 jersey2-api
 jira
 jjwt-api
+job-dsl
 joda-time-api
 jquery3-api
 json-api

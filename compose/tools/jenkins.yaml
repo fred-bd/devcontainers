@@ -11,7 +11,8 @@ services:
       - 50000:50000
 
     volumes:
-      - ./jenkins:/var/configurations/casc
+      - ./jenkins/casc:/var/configurations/casc
+      - ./jenkins/jobs:/var/configurations/jobs
       - jenkins_home:/var/jenkins_home
       - ${HOME}/self-certificates/docker/ca-certificate.pem:/home/jenkins/certificates/ca.pem:cached
       - ${HOME}/self-certificates/docker/client-certificate.pem:/home/jenkins/certificates/cert.pem:cached

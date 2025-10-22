@@ -1,0 +1,10 @@
+unclassified:
+  globalLibraries:
+    libraries:
+      - name: "jenkins-shared"
+        retriever:
+          modernSCM:
+            scm:
+              git:
+                remote: "https://github.com/fred-bd/jenkins-shared-libraries.git"
+ 
