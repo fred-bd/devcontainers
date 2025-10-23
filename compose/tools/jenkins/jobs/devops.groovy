@@ -1,11 +1,11 @@
 folder('devops')
 
 pipelineJob("devops/configure-vault") {
-  // parameters {
-  //   stringParam('Name', '', 'Your CNE will be prefixed with prod-cne')
-  //   stringParam('BackupFileName', '', 'Full file name of database backup you want loaded, including tar.gz. Example: "Store-1213-20221026080010.tar.gz"')
-  // }
-  // displayName("prod-cne")
+  parameters {
+    stringParam('VaultAddr', 'http://localhost:8200', 'The address to the vault')
+  }
+
+  displayName("Configure vault resources")
   keepDependencies(false)
   throttleConcurrentBuilds {
     maxPerNode(0)
@@ -14,8 +14,8 @@ pipelineJob("devops/configure-vault") {
   }
   definition {
     cps {
-      script('''@Library("infra-shared@main")_
-configureVault {}''')
+      script('''@Library("jenkins-shared@main")_
+configureVault { credentialId="vaultAdminToken" }''')
       sandbox(true)
     }
   }
