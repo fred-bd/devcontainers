@@ -81,6 +81,24 @@ jenkins:
         pullStrategy: PULL_NEVER
         pullTimeout: 300
         remoteFs: "/home/jenkins/agent"
+      - connector:
+          ssh:
+            sshKeyStrategy:
+              manuallyConfiguredSSHKey:
+                credentialsId: "jenkins-ssh-agent-key"
+                sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+        dockerTemplateBase:
+          bindAllPorts: true
+          bindPorts: "2223:22"
+          cpuPeriod: 0
+          cpuQuota: 0
+          image: "kubernetes-ssh-agent:0.0.1"
+          tty: true
+        labelString: "kube-agent"
+        name: "kube-agent"
+        pullStrategy: PULL_NEVER
+        pullTimeout: 300
+        remoteFs: "/home/jenkins/agent"
 globalCredentialsConfiguration:
   configuration:
     providerFilter: "none"

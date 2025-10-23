@@ -24,3 +24,29 @@ configureVault {
     }
   }
 }
+
+pipelineJob("devops/configure-flux") {
+  parameters {
+    stringParam('VaultAddr', 'http://localhost:8200', 'The address to the vault')
+    stringParam('KubeFilePath', 'cluster-hosts/note', 'The path to vault secret containing kubeconfig file')
+    stringParam('KubeFileSecret', 'note-kubeconfig', 'The key name of the secret containing kubeconfig file')
+  }
+
+  displayName("Configure flux resources")
+  keepDependencies(false)
+  throttleConcurrentBuilds {
+    maxPerNode(0)
+    maxTotal(0)
+    throttleDisabled(true)
+  }
+  definition {
+    cps {
+      script('''@Library("jenkins-shared@main")_
+configureFlux { 
+  credentialId="vaultAdminToken"
+  agentName="kube-agent"
+}''')
+      sandbox(true)
+    }
+  }
+}

@@ -2,39 +2,27 @@ FROM base-ssh-agent:0.0.1 AS base
 LABEL maintainer="Frederico Bedê <bede.apps@gmail.com>"
 
 RUN apt-get update && apt-get install -y\
-  gnupg\
-  ca-certificates\
-  unzip\
-  jq\
-  openssh-client\
-  sshpass\
-  apache2-utils\
-  iputils-ping\
-  net-tools\
-  vim\
-  dnsutils\
   curl\
-  wget\
-  git
+  unzip
 
 # Apps versions
-ENV HELM_VERSION="v3.10.0"
+# ENV HELM_VERSION="v3.10.0"
 ENV KUBECTL_VERSION="v1.31.4"
-ENV YQ_VERSION="v4.40.5"
+# ENV YQ_VERSION="v4.40.5"
 ENV TMP_APPS_DIR=/tmp/apps/install
 
-ARG PRODUCT=terraform
-ARG VERSION=1.9.1
+# ARG PRODUCT=terraform
+# ARG VERSION=1.9.1
 ARG VAULT_VERSION=1.14.10
 ARG FLUX_CLI_VERSION=2.7.2
 
 RUN mkdir -p ${TMP_APPS_DIR}
 
-# Install helm
-RUN curl -fsSL\ 
-  https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz -o ${TMP_APPS_DIR}/helm.tar.gz &&\
-  tar -zxvf ${TMP_APPS_DIR}/helm.tar.gz -C ${TMP_APPS_DIR} &&\
-  mv ${TMP_APPS_DIR}/linux-amd64/helm /tmp/apps/
+# # Install helm
+# RUN curl -fsSL\ 
+#   https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz -o ${TMP_APPS_DIR}/helm.tar.gz &&\
+#   tar -zxvf ${TMP_APPS_DIR}/helm.tar.gz -C ${TMP_APPS_DIR} &&\
+#   mv ${TMP_APPS_DIR}/linux-amd64/helm /tmp/apps/
 
 # Download and install kubectl
 RUN curl -fsSL\ 
@@ -48,9 +36,9 @@ RUN curl -fsSL\
   unzip ${TMP_APPS_DIR}/vault.zip -d ${TMP_APPS_DIR}/ &&\
   mv ${TMP_APPS_DIR}/vault /tmp/apps/
 
-# Download and install yq
-RUN wget -qO /tmp/apps/yq https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64 \
-  && chmod +x /tmp/apps/yq
+# # Download and install yq
+# RUN wget -qO /tmp/apps/yq https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64 \
+#   && chmod +x /tmp/apps/yq
 
 # Install Flux CLI  
 RUN curl -fsSL \ 
