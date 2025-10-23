@@ -1,0 +1,27 @@
+FROM base-ssh-agent:0.0.1 AS base
+LABEL maintainer="Frederico Bedê <bede.apps@gmail.com>"
+
+RUN apt-get update && apt-get install -y\
+  curl\
+  unzip
+
+# Apps versions
+ENV TMP_APPS_DIR=/tmp/apps/install
+ARG VAULT_VERSION=1.14.10
+
+RUN mkdir -p ${TMP_APPS_DIR}
+
+# Download and install vault cli
+RUN curl -fsSL\
+  https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip -o ${TMP_APPS_DIR}/vault.zip &&\
+  unzip ${TMP_APPS_DIR}/vault.zip -d ${TMP_APPS_DIR}/ &&\
+  mv ${TMP_APPS_DIR}/vault /tmp/apps/
+
+FROM base-ssh-agent:0.0.1
+
+RUN apt-get update && apt-get install -y\
+  jq\
+  git
+
+COPY --from=base tmp/apps /usr/local/bin
+

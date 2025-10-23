@@ -3,6 +3,7 @@ folder('devops')
 pipelineJob("devops/configure-vault") {
   parameters {
     stringParam('VaultAddr', 'http://localhost:8200', 'The address to the vault')
+    stringParam('CommonName', 'bede-apps.com', 'The common name allowed for certificates issuers.')
   }
 
   displayName("Configure vault resources")
@@ -15,7 +16,10 @@ pipelineJob("devops/configure-vault") {
   definition {
     cps {
       script('''@Library("jenkins-shared@main")_
-configureVault { credentialId="vaultAdminToken" }''')
+configureVault { 
+  credentialId="vaultAdminToken"
+  agentName="vault-agent"
+}''')
       sandbox(true)
     }
   }
