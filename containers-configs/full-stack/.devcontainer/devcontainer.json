@@ -42,7 +42,9 @@
 				"ms-dotnettools.csharp",
 				"ms-dotnettools.vscodeintellicode-csharp",
 				"msjsdiag.vscode-react-native",
-				"github.vscode-github-actions"
+				"github.vscode-github-actions",
+				"weaveworks.vscode-gitops-tools",
+				"ms-kubernetes-tools.vscode-kubernetes-tools"
 			]
 		}
 	},
