@@ -33,6 +33,8 @@ pipelineJob("devops/configure-flux") {
     booleanParam('CleanFluxResources', true, 'Remove all resources from the cluster including flux')
     booleanParam('ConfigureSharding', true, 'Use additional shard controllers')
     stringParam('KubeAuthNs', 'cert-manager,grafana,kiali', 'Namespaces to copy kubernetes auth secret to use in vault')
+    stringParam('FluxConfigRepo', 'https://github.com/fred-bd/flux-clusters-configurations.git', 'The repository containing the flux configurations')
+    stringParam('FluxConfigRepoPath', 'overlays/prod', 'Location within the repository of the main configuration')
   }
 
   displayName("Configure flux resources")
@@ -48,6 +50,9 @@ pipelineJob("devops/configure-flux") {
 configureFlux { 
   credentialId="vaultAdminToken"
   agentName="kube-agent"
+  helmSecretPath="helm-repo-credentials/chartmuseum"
+  helmUserKey="user_name"
+  helmPasswordKey="user_password"
 }''')
       sandbox(true)
     }
