@@ -36,7 +36,7 @@ services:
       - agentKeyPass
 
     extra_hosts:
-      - "bede-apps.com:192.168.15.10"
+      - "bede-apps.com:80.0.0.1"
 
 volumes:
   jenkins_home:

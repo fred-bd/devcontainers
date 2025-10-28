@@ -20,6 +20,7 @@ services:
 
     volumes:
       - ${HOME}/MyProjects:/home/${USER}/projects:cached
+      - ${HOME}/.ssh:/home/${USER}/.ssh:cached
       - ${HOME}/self-certificates/docker/ca-certificate.pem:/home/${USER}/certificates/ca.pem:cached
       - ${HOME}/self-certificates/docker/client-certificate.pem:/home/${USER}/certificates/cert.pem:cached
       - ${HOME}/self-certificates/docker/client-key.pem:/home/${USER}/certificates/key.pem:cached
